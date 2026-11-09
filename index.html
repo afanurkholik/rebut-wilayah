@@ -58,6 +58,11 @@ textarea.in{height:300px;padding:12px 14px;font:500 14px/1.55 ui-monospace,SFMon
 .btn.primary{border:0;background:linear-gradient(90deg,var(--violet),var(--blue));color:#fff;box-shadow:0 6px 16px rgba(58,43,209,.35)}
 .btn.orange{border:0;background:linear-gradient(90deg,var(--fuel-a),var(--fuel-b));color:#3b1d00}
 .btn.ghost{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);color:#fff}
+.btn.wa{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:0;background:#1fa855;color:#fff;box-shadow:0 6px 16px rgba(31,168,85,.35)}
+.wa-cta{grid-template-columns:minmax(0,1fr) auto;align-items:center;border:3px solid #1fa855;background:#f0fbf4}
+.wa-cta p{margin:6px 0 0;color:var(--muted);font-weight:700}
+.wa-cta .btn.wa{height:56px;font-size:17px;padding:0 24px}
+@media (max-width:700px){.wa-cta{grid-template-columns:1fr}}
 .btn:disabled{opacity:.5;cursor:default}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .spacer{flex:1}
@@ -288,6 +293,7 @@ table.rep{width:100%;border-collapse:collapse;font-size:15px}
         <p class="err hidden" id="g-err" role="alert"></p>
         <button class="go" id="g-create" type="button">Buat ruang</button>
         <button class="btn" id="g-qris-open" type="button">Traktir kopi pembuatnya</button>
+        <a class="btn wa" href="https://chat.whatsapp.com/KGKyyhzOIIbHHe02ShPIJY" target="_blank" rel="noopener">Gabung Grup Guru (paket soal gratis)</a>
       </div>
     </div>
     <button class="link" id="to-murid" type="button">Saya murid: masuk ke ruang</button>
@@ -336,6 +342,13 @@ table.rep{width:100%;border-collapse:collapse;font-size:15px}
 <section class="screen hidden" id="s-gend">
   <div class="wrap">
     <div class="box" style="text-align:center"><span class="lbl">Waktu habis</span><h2 id="ge-win" style="font-size:clamp(34px,6vw,56px)"></h2></div>
+    <div class="box wa-cta">
+      <div>
+        <h2>Kelasnya seru? Gabung Grup Guru Rebut Wilayah</h2>
+        <p>Gratis. Dapat paket soal siap tempel, tips bikin kelas aktif, dan coba mode game baru lebih dulu. Punya ide game? Ceritakan di grup.</p>
+      </div>
+      <a class="btn wa" href="https://chat.whatsapp.com/KGKyyhzOIIbHHe02ShPIJY" target="_blank" rel="noopener">Gabung grup WhatsApp</a>
+    </div>
     <div class="cols2">
       <div class="box"><h2>Wilayah akhir</h2><div class="bars" id="ge-bars"></div></div>
       <div class="box"><h2>Kontribusi teratas</h2><ol class="top" id="ge-top"></ol></div>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rebut Wilayah: game kuis kelas, gratis untuk guru</title>
+<meta name="description" content="Tempel soal, murid scan QR, kelas langsung berebut wilayah sambil menjawab soal. Gratis, tanpa install, jalan di HP murid.">
+<meta property="og:title" content="Rebut Wilayah: bikin kelas rebutan jawab soal">
+<meta property="og:description" content="Game kuis kelas buatan guru, untuk guru. Gratis, tanpa install.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b1446; --muted:#5a5480; --line:#e4e0f5; --soft:#f6f4fd;
+  --violet:#6d4dff; --blue:#3a86ff; --teal:#2fd8c0;
+  --orange:#ff7a1a; --yellow:#ffc21a; --wa:#1fa855;
+  --red:#e63946; --green:#2fbf55;
+  --display:"Lilita One","Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:#fff;line-height:1.6}
+a{color:inherit}
+.wrap{width:min(1080px,100% - 32px);margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.1;margin:0}
+p{margin:0}
+
+/* Buttons */
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 26px;border-radius:999px;font-weight:800;font-size:17px;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.main{background:linear-gradient(90deg,var(--yellow),var(--orange));color:#3b1d00;box-shadow:0 10px 24px rgba(255,122,26,.4)}
+.btn.wa{background:var(--wa);color:#fff;box-shadow:0 10px 24px rgba(31,168,85,.35)}
+.btn.line{background:rgba(255,255,255,.16);color:#fff;border:2px solid rgba(255,255,255,.6)}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+
+/* Hero */
+.hero{background:linear-gradient(160deg,var(--violet) 0%,var(--blue) 55%,var(--teal) 100%);color:#fff;padding:22px 0 72px;overflow:hidden}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+.logo{font-family:var(--display);font-size:22px;display:flex;align-items:center;gap:10px}
+.logo i{display:inline-grid;grid-template-columns:repeat(2,10px);gap:3px}
+.logo i b{width:10px;height:10px;border-radius:3px;display:block}
+.nav a{font-weight:800;text-decoration:none;opacity:.95}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center}
+.eyebrow{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);padding:6px 14px;border-radius:999px;font-weight:800;font-size:14px;margin-bottom:18px}
+.hero h1{font-size:clamp(40px,6.4vw,68px);text-shadow:0 4px 0 rgba(27,20,70,.2)}
+.hero h1 span{color:var(--yellow)}
+.hero .sub{font-size:clamp(17px,2vw,20px);font-weight:700;margin:18px 0 28px;max-width:34ch;opacity:.97}
+.hero .note{margin-top:16px;font-weight:700;font-size:14px;opacity:.9}
+
+/* Map illustration */
+.board{background:#fff;border-radius:28px;padding:18px;box-shadow:0 30px 60px rgba(27,20,70,.35);transform:rotate(1.5deg)}
+.board-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;color:var(--ink)}
+.board-top b{font-family:var(--display);font-size:20px}
+.timer{font-family:var(--display);background:var(--ink);color:#fff;border-radius:10px;padding:2px 10px}
+.tiles{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.tiles span{aspect-ratio:1;border-radius:5px;background:#ece9f8}
+.bars{display:grid;gap:6px;margin-top:14px}
+.bar{display:grid;grid-template-columns:70px 1fr 34px;align-items:center;gap:8px;font-weight:800;font-size:13px;color:var(--ink)}
+.bar div{height:12px;border-radius:99px;background:#ece9f8;overflow:hidden}
+.bar div i{display:block;height:100%;border-radius:99px}
+
+/* Sections */
+section{padding:72px 0}
+.sec-h{text-align:center;max-width:680px;margin:0 auto 40px}
+.sec-h h2{font-size:clamp(30px,4.2vw,44px)}
+.sec-h p{color:var(--muted);font-weight:700;margin-top:12px;font-size:17px}
+
+.story{background:var(--soft)}
+.story-card{max-width:760px;margin:0 auto;background:#fff;border-radius:28px;padding:34px;box-shadow:0 14px 34px rgba(27,20,70,.08);display:grid;gap:14px;font-size:18px}
+.story-card .q{font-family:var(--display);font-size:clamp(24px,3vw,32px);color:var(--violet);line-height:1.2}
+.story-card .sig{font-weight:800;color:var(--muted);font-size:15px}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{background:#fff;border:2px solid var(--line);border-radius:24px;padding:26px;display:grid;gap:10px;align-content:start}
+.step .n{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-family:var(--display);font-size:24px;color:#fff}
+.step h3{font-size:24px}
+.step p{color:var(--muted);font-weight:600}
+
+.feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.feat{display:grid;grid-template-columns:44px 1fr;gap:14px;background:var(--soft);border-radius:20px;padding:20px}
+.feat .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#fff;font-size:22px}
+.feat h3{font-family:var(--body);font-weight:800;font-size:18px;margin-bottom:4px}
+.feat p{color:var(--muted);font-weight:600;font-size:15px}
+
+.group{background:linear-gradient(160deg,#0f7a3d,var(--wa));color:#fff}
+.group-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:center}
+.group h2{font-size:clamp(30px,4.2vw,44px)}
+.group p.lead{font-weight:700;font-size:18px;margin:14px 0 24px;opacity:.96}
+.perks{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.perks li{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:18px;padding:16px 18px;font-weight:700}
+.perks li b{display:block;font-size:17px}
+.group .btn.wa{background:#fff;color:#0f7a3d}
+
+.faq{max-width:760px;margin:0 auto;display:grid;gap:12px}
+details{border:2px solid var(--line);border-radius:18px;padding:16px 20px;background:#fff}
+summary{font-weight:800;cursor:pointer;font-size:17px;list-style-position:outside}
+details p{color:var(--muted);font-weight:600;margin-top:10px}
+
+.final{background:linear-gradient(160deg,var(--violet),var(--blue));color:#fff;text-align:center}
+.final h2{font-size:clamp(32px,4.6vw,50px)}
+.final p{font-weight:700;font-size:18px;margin:14px auto 28px;max-width:40ch}
+.final .btns{justify-content:center}
+footer{padding:26px 0;text-align:center;color:var(--muted);font-weight:700;font-size:14px}
+
+@media (max-width:860px){
+  .hero-grid,.group-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .feats{grid-template-columns:1fr}
+  .board{transform:none}
+  section{padding:56px 0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav">
+      <span class="logo"><i><b style="background:#e63946"></b><b style="background:#3a86ff"></b><b style="background:#2fbf55"></b><b style="background:#ffc21a"></b></i>Rebut Wilayah</span>
+      <a href="#grup">Grup Guru</a>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Gratis untuk guru · tanpa install</span>
+        <h1>Kelas ngantuk? Bikin mereka <span>rebutan jawab soal.</span></h1>
+        <p class="sub">Tempel soalmu, murid scan QR pakai HP, lalu tiap tim berebut wilayah di peta. Jawab benar, tenaga terisi. Tim dengan wilayah terbanyak menang.</p>
+        <div class="btns">
+          <a class="btn main" href="/#guru">Coba gratis sekarang</a>
+          <a class="btn line" href="#cara">Lihat caranya</a>
+        </div>
+        <p class="note">Cukup laptop + proyektor untuk guru, dan HP untuk murid.</p>
+      </div>
+      <div class="board" aria-hidden="true">
+        <div class="board-top"><b>Layar proyektor</b><span class="timer">04:12</span></div>
+        <div class="tiles" id="tiles"></div>
+        <div class="bars">
+          <div class="bar">Merah<div><i style="width:72%;background:var(--red)"></i></div>36</div>
+          <div class="bar">Biru<div><i style="width:60%;background:var(--blue)"></i></div>30</div>
+          <div class="bar">Hijau<div><i style="width:44%;background:var(--green)"></i></div>22</div>
+          <div class="bar">Kuning<div><i style="width:24%;background:var(--yellow)"></i></div>12</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="story">
+  <div class="wrap">
+    <div class="story-card">
+      <p class="q">"Aku guru. Kelasku sering lemas setelah materi teori, jadi aku bikin game ini sendiri."</p>
+      <p>Aku ingin murid latihan soal tanpa merasa sedang dites. Hasilnya Rebut Wilayah: game yang bisa langsung dipakai tanpa ribet pindah aplikasi, tanpa install, dan tanpa harus jago teknologi.</p>
+      <p class="sig">Wafa, guru dan pembuat Rebut Wilayah · WalikLabs</p>
+    </div>
+  </div>
+</section>
+
+<section id="cara">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Siap main dalam 3 langkah</h2>
+      <p>Kalau bisa copy-paste, kamu bisa pakai ini.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="n" style="background:var(--red)">1</span><h3>Tempel soal</h3><p>Pilihan ganda biasa. Tandai jawaban benar dengan bintang (*). Bisa juga salin langsung dari Excel atau Google Sheets.</p></div>
+      <div class="step"><span class="n" style="background:var(--blue)">2</span><h3>Murid scan QR</h3><p>Kode dan QR muncul di proyektor. Murid ketik nama, pilih karakter, dan otomatis masuk ke tim berwarna.</p></div>
+      <div class="step"><span class="n" style="background:var(--green)">3</span><h3>Rebut wilayah!</h3><p>Murid lari dan lompat mewarnai blok. Tenaga habis? Jawab soal dulu. Jawab benar, tenaga terisi dan lanjut berebut.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Bukan cuma seru</h2>
+      <p>Setelah game selesai, kamu juga tahu materi mana yang perlu diulang.</p>
+    </div>
+    <div class="feats">
+      <div class="feat"><span class="ic">📊</span><div><h3>Laporan per soal</h3><p>Soal yang paling banyak salah tampil paling atas, lengkap dengan jawaban salah yang paling sering dipilih.</p></div></div>
+      <div class="feat"><span class="ic">🧑‍🤝‍🧑</span><div><h3>Main berkelompok</h3><p>2 sampai 4 tim. Murid yang rajin menjawab benar paling berpengaruh ke kemenangan timnya.</p></div></div>
+      <div class="feat"><span class="ic">⏱️</span><div><h3>Durasi bisa diatur</h3><p>Pas untuk pembuka, review akhir pelajaran, atau ice breaker. Bisa tambah waktu saat game berjalan.</p></div></div>
+      <div class="feat"><span class="ic">💾</span><div><h3>Simpan set soal</h3><p>Soal tersimpan di laptopmu. Minggu depan tinggal klik "Pakai", tanpa mengetik ulang.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="group" id="grup">
+  <div class="wrap group-grid">
+    <div>
+      <h2>Gabung Grup Guru Rebut Wilayah</h2>
+      <p class="lead">Komunitas WhatsApp untuk guru yang ingin kelasnya lebih hidup. Gratis.</p>
+      <a class="btn wa" href="https://chat.whatsapp.com/KGKyyhzOIIbHHe02ShPIJY" target="_blank" rel="noopener">Gabung grup WhatsApp</a>
+    </div>
+    <ul class="perks">
+      <li><b>Paket soal siap tempel</b>Tinggal copy, langsung jadi game.</li>
+      <li><b>Mode game baru lebih dulu</b>Anggota grup yang pertama mencoba.</li>
+      <li><b>Request game impianmu</b>Punya ide game untuk mapelmu? Ceritakan di grup. Ide yang paling banyak diminta akan dibuat.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-h"><h2>Pertanyaan yang sering muncul</h2></div>
+    <div class="faq">
+      <details><summary>Beneran gratis?</summary><p>Ya. Rebut Wilayah bisa dipakai gratis. Kalau merasa terbantu, ada tombol "traktir kopi" seikhlasnya, tapi tidak wajib.</p></details>
+      <details><summary>Murid perlu install aplikasi?</summary><p>Tidak. Murid cukup membuka link atau scan QR di browser HP. Guru juga cukup membuka website di laptop.</p></details>
+      <details><summary>Bagaimana kalau murid tidak punya HP?</summary><p>Murid bisa bergantian atau satu HP dipakai berdua. Game tetap seru karena dimainkan per tim.</p></details>
+      <details><summary>Butuh internet kencang?</summary><p>Butuh internet di laptop guru dan HP murid. Game dibuat ringan, tapi sebaiknya dicoba dulu sebelum dipakai di kelas.</p></details>
+      <details><summary>Cocok untuk jenjang apa?</summary><p>Semua jenjang yang memakai soal pilihan ganda, dari SD sampai kuliah dan pelatihan. Isi soalnya kamu yang tentukan.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Coba di kelasmu minggu ini</h2>
+    <p>Siapkan 10 soal, buka di proyektor, dan lihat kelasmu berubah jadi arena.</p>
+    <div class="btns">
+      <a class="btn main" href="/#guru">Coba gratis sekarang</a>
+      <a class="btn wa" href="https://chat.whatsapp.com/KGKyyhzOIIbHHe02ShPIJY" target="_blank" rel="noopener">Gabung Grup Guru</a>
+    </div>
+  </div>
+</section>
+
+<footer>Rebut Wilayah · dibuat oleh WalikLabs: ngulik AI dan dunia digital</footer>
+
+<script>
+(function(){
+  var c=['#e63946','#3a86ff','#2fbf55','#ffc21a'], t=document.getElementById('tiles'), html='';
+  var w=[.22,.18,.13,.07];
+  for(var i=0;i<60;i++){
+    var r=Math.random(), acc=0, col='#ece9f8';
+    for(var k=0;k<4;k++){acc+=w[k]; if(r<acc){col=c[k];break;}}
+    html+='<span style="background:'+col+'"></span>';
+  }
+  t.innerHTML=html;
+})();
+</script>
+</body>
+</html>
