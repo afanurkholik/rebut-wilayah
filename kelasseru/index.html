@@ -79,6 +79,16 @@ section{padding:72px 0}
 .step h3{font-size:24px}
 .step p{color:var(--muted);font-weight:600}
 
+.shot-grid{display:grid;grid-template-columns:220px 220px minmax(0,1fr);gap:22px;align-items:center}
+.shot-grid figure{margin:0;display:grid;gap:10px;justify-items:center}
+.shot-grid figcaption{font-weight:800;font-size:14px;color:var(--muted);text-align:center}
+.shot-grid img{display:block;width:100%;height:auto}
+.phone img{border:8px solid var(--ink);border-radius:30px;box-shadow:0 18px 40px rgba(27,20,70,.25)}
+.screen-shot img{border:8px solid var(--ink);border-radius:18px;box-shadow:0 18px 40px rgba(27,20,70,.25)}
+@media (max-width:860px){
+  .shot-grid{grid-template-columns:1fr 1fr}
+  .screen-shot{grid-column:1 / -1}
+}
 .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .feat{display:grid;grid-template-columns:44px 1fr;gap:14px;background:var(--soft);border-radius:20px;padding:20px}
 .feat .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#fff;font-size:22px}
@@ -168,6 +178,20 @@ footer{padding:26px 0;text-align:center;color:var(--muted);font-weight:700;font-
       <div class="step"><span class="n" style="background:var(--red)">1</span><h3>Tempel soal</h3><p>Pilihan ganda biasa. Tandai jawaban benar dengan bintang (*). Bisa juga salin langsung dari Excel atau Google Sheets.</p></div>
       <div class="step"><span class="n" style="background:var(--blue)">2</span><h3>Murid scan QR</h3><p>Kode dan QR muncul di layar guru, bisa HP, laptop, atau proyektor. Murid ketik nama, pilih karakter, dan otomatis masuk ke tim berwarna.</p></div>
       <div class="step"><span class="n" style="background:var(--green)">3</span><h3>Rebut wilayah!</h3><p>Murid lari dan lompat mewarnai blok. Tenaga habis? Jawab soal dulu. Jawab benar, tenaga terisi dan lanjut berebut.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="shots" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Begini rasanya di dalam game</h2>
+      <p>Murid lari, lompat, dan berebut blok di HP masing-masing. Guru memantau semuanya dari satu layar.</p>
+    </div>
+    <div class="shot-grid">
+      <figure class="phone"><img src="img/hp-main.webp" width="390" height="844" alt="Layar HP murid saat bermain: karakter berlari di atas blok warna tim, dengan tombol jalan, lompat, dan isi bensin" loading="lazy"><figcaption>HP murid: rebut blok sebanyak-banyaknya</figcaption></figure>
+      <figure class="phone"><img src="img/hp-soal.webp" width="360" height="640" alt="Layar HP murid saat bensin habis: muncul soal pilihan ganda dengan empat pilihan berwarna dan hitung mundur" loading="lazy"><figcaption>Bensin habis? Jawab soal dulu</figcaption></figure>
+      <figure class="screen-shot"><img src="img/layar-guru.webp" width="1280" height="800" alt="Layar guru saat permainan berjalan: timer besar, persentase wilayah tiap tim, peta mini, dan kontribusi murid teratas" loading="lazy"><figcaption>Layar guru: timer, wilayah tiap tim, dan murid paling aktif</figcaption></figure>
     </div>
   </div>
 </section>
